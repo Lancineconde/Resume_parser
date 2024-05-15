@@ -1,5 +1,5 @@
 import { BULLET_POINTS } from "lib/parse-resume-from-pdf/extract-resume-from-sections/lib/bullet-points";
-import { isBold } from "lib/parse-resume-from-pdf/extract-resume-from-sections/lib/common-features";
+import { isBold, hasNumber, hasLetter } from "lib/parse-resume-from-pdf/extract-resume-from-sections/lib/common-features";
 import type { Lines, Line, Subsections } from "lib/parse-resume-from-pdf/types";
 
 /**
@@ -14,8 +14,7 @@ import type { Lines, Line, Subsections } from "lib/parse-resume-from-pdf/types";
 export const divideSectionIntoSubsections = (lines: Lines): Subsections => {
   // The main heuristic to determine a subsection is to check if its vertical line gap
   // is larger than the typical line gap * 1.4
-  const isLineNewSubsectionByLineGap =
-    createIsLineNewSubsectionByLineGap(lines);
+  const isLineNewSubsectionByLineGap = createIsLineNewSubsectionByLineGap(lines);
 
   let subsections = createSubsections(lines, isLineNewSubsectionByLineGap);
 
@@ -36,14 +35,23 @@ export const divideSectionIntoSubsections = (lines: Lines): Subsections => {
     subsections = createSubsections(lines, isLineNewSubsectionByBold);
   }
 
+  // Additional fallback heuristic to divide based on presence of dates or job titles
+  if (subsections.length === 1) {
+    const isLineNewSubsectionByContent = (line: Line, prevLine: Line) => {
+      const hasDate = /(?:19|20)\d{2}/.test(line[0].text); // Check for years
+      const hasJobTitle = line.length > 0 && hasLetter(line[0]) && !hasNumber(line[0]);
+      return hasDate || hasJobTitle;
+    };
+
+    subsections = createSubsections(lines, isLineNewSubsectionByContent);
+  }
+
   return subsections;
 };
 
 type IsLineNewSubsection = (line: Line, prevLine: Line) => boolean;
 
-const createIsLineNewSubsectionByLineGap = (
-  lines: Lines
-): IsLineNewSubsection => {
+const createIsLineNewSubsectionByLineGap = (lines: Lines): IsLineNewSubsection => {
   // Extract the common typical line gap
   const lineGapToCount: { [lineGap: number]: number } = {};
   const linesY = lines.map((line) => line[0].y);
@@ -68,10 +76,7 @@ const createIsLineNewSubsectionByLineGap = (
   return isLineNewSubsection;
 };
 
-const createSubsections = (
-  lines: Lines,
-  isLineNewSubsection: IsLineNewSubsection
-): Subsections => {
+const createSubsections = (lines: Lines, isLineNewSubsection: IsLineNewSubsection): Subsections => {
   const subsections: Subsections = [];
   let subsection: Lines = [];
   for (let i = 0; i < lines.length; i++) {

@@ -13,6 +13,9 @@ import type { Lines, TextItem } from "lib/parse-resume-from-pdf/types";
  * U+2B24   BLACK LARGE CIRCLE (⬤)
  * U+26AC   MEDIUM SMALL WHITE CIRCLE ⚬
  * U+25CB   WHITE CIRCLE ○
+ * U+25AA   BLACK SMALL SQUARE (▪) -------- common in French resumes
+ * U+25A0   BLACK SQUARE (■)
+ * U+25A1   WHITE SQUARE (□)
  */
 export const BULLET_POINTS = [
   "⋅",
@@ -25,6 +28,9 @@ export const BULLET_POINTS = [
   "⬤",
   "⚬",
   "○",
+  "▪",
+  "■",
+  "□"
 ];
 
 /**

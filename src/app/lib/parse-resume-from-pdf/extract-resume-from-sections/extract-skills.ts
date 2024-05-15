@@ -8,8 +8,14 @@ import {
   getDescriptionsLineIdx,
 } from "lib/parse-resume-from-pdf/extract-resume-from-sections/lib/bullet-points";
 
+// Update keywords to include French terms
+const SKILLS_KEYWORDS = [
+  "skills", "skill", "competencies", "abilities", 
+  "compétences", "savoir faire", "compétences techniques", "compétences métiers"
+];
+
 export const extractSkills = (sections: ResumeSectionToLines) => {
-  const lines = getSectionLinesByKeywords(sections, ["skill"]);
+  const lines = getSectionLinesByKeywords(sections, SKILLS_KEYWORDS);
   const descriptionsLineIdx = getDescriptionsLineIdx(lines) ?? 0;
   const descriptionsLines = lines.slice(descriptionsLineIdx);
   const descriptions = getBulletPointsFromLines(descriptionsLines);

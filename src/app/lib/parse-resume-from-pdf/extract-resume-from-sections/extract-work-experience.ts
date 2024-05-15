@@ -18,14 +18,42 @@ import {
   getDescriptionsLineIdx,
 } from "lib/parse-resume-from-pdf/extract-resume-from-sections/lib/bullet-points";
 
-// prettier-ignore
-const WORK_EXPERIENCE_KEYWORDS_LOWERCASE = ['work', 'experience', 'employment', 'history', 'job'];
-// prettier-ignore
-const JOB_TITLES = ['Accountant', 'Administrator', 'Advisor', 'Agent', 'Analyst', 'Apprentice', 'Architect', 'Assistant', 'Associate', 'Auditor', 'Bartender', 'Biologist', 'Bookkeeper', 'Buyer', 'Carpenter', 'Cashier', 'CEO', 'Clerk', 'Co-op', 'Co-Founder', 'Consultant', 'Coordinator', 'CTO', 'Developer', 'Designer', 'Director', 'Driver', 'Editor', 'Electrician', 'Engineer', 'Extern', 'Founder', 'Freelancer', 'Head', 'Intern', 'Janitor', 'Journalist', 'Laborer', 'Lawyer', 'Lead', 'Manager', 'Mechanic', 'Member', 'Nurse', 'Officer', 'Operator', 'Operation', 'Photographer', 'President', 'Producer', 'Recruiter', 'Representative', 'Researcher', 'Sales', 'Server', 'Scientist', 'Specialist', 'Supervisor', 'Teacher', 'Technician', 'Trader', 'Trainee', 'Treasurer', 'Tutor', 'Vice', 'VP', 'Volunteer', 'Webmaster', 'Worker'];
+// Add French keywords for work experience section
+const WORK_EXPERIENCE_KEYWORDS_LOWERCASE = [
+  'work', 'experience', 'employment', 'history', 'job', 
+  'expériences professionnelles', 'expérience', 'travail', 'emploi'
+];
+
+// Add French job titles to the list
+const JOB_TITLES = [
+  'Accountant', 'Administrator', 'Advisor', 'Agent', 'Analyst', 'Apprentice', 
+  'Architect', 'Assistant', 'Associate', 'Auditor', 'Bartender', 'Biologist', 
+  'Bookkeeper', 'Buyer', 'Carpenter', 'Cashier', 'CEO', 'Clerk', 'Co-op', 
+  'Co-Founder', 'Consultant', 'Coordinator', 'CTO', 'Developer', 'Designer', 
+  'Director', 'Driver', 'Editor', 'Electrician', 'Engineer', 'Extern', 'Founder', 
+  'Freelancer', 'Head', 'Intern', 'Janitor', 'Journalist', 'Laborer', 'Lawyer', 
+  'Lead', 'Manager', 'Mechanic', 'Member', 'Nurse', 'Officer', 'Operator', 
+  'Operation', 'Photographer', 'President', 'Producer', 'Recruiter', 
+  'Representative', 'Researcher', 'Sales', 'Server', 'Scientist', 'Specialist', 
+  'Supervisor', 'Teacher', 'Technician', 'Trader', 'Trainee', 'Treasurer', 
+  'Tutor', 'Vice', 'VP', 'Volunteer', 'Webmaster', 'Worker',
+  'Comptable', 'Administrateur', 'Conseiller', 'Agent', 'Analyste', 'Apprenti', 
+  'Architecte', 'Assistant', 'Associé', 'Auditeur', 'Barman', 'Biologiste', 
+  'Comptable', 'Acheteur', 'Charpentier', 'Caissier', 'PDG', 'Clerc', 'Coop', 
+  'Co-Fondateur', 'Consultant', 'Coordinateur', 'Directeur Technique', 
+  'Développeur', 'Designer', 'Directeur', 'Chauffeur', 'Éditeur', 'Électricien', 
+  'Ingénieur', 'Externe', 'Fondateur', 'Freelance', 'Chef', 'Stagiaire', 
+  'Journaliste', 'Manœuvre', 'Avocat', 'Chef', 'Gestionnaire', 'Mécanicien', 
+  'Membre', 'Infirmière', 'Officier', 'Opérateur', 'Opération', 'Photographe', 
+  'Président', 'Producteur', 'Recruteur', 'Représentant', 'Chercheur', 
+  'Ventes', 'Serveur', 'Scientifique', 'Spécialiste', 'Superviseur', 'Enseignant', 
+  'Technicien', 'Commerçant', 'Stagiaire', 'Trésorier', 'Tuteur', 'Vice', 'VP', 
+  'Bénévole', 'Webmaster', 'Travailleur'
+];
 
 const hasJobTitle = (item: TextItem) =>
   JOB_TITLES.some((jobTitle) =>
-    item.text.split(/\s/).some((word) => word === jobTitle)
+    item.text.split(/\s/).some((word) => word.toLowerCase() === jobTitle.toLowerCase())
   );
 const hasMoreThan5Words = (item: TextItem) => item.text.split(/\s/).length > 5;
 const JOB_TITLE_FEATURE_SET: FeatureSet[] = [
