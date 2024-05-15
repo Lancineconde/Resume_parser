@@ -17,7 +17,7 @@ export const ProfileForm = () => {
     <BaseForm>
       <div className="grid grid-cols-6 gap-3">
         <Input
-          label="Name"
+          label="Nom"
           labelClassName="col-span-full"
           name="name"
           placeholder="Sal Khan"
@@ -25,7 +25,7 @@ export const ProfileForm = () => {
           onChange={handleProfileChange}
         />
         <Textarea
-          label="Objective"
+          label="Profil"
           labelClassName="col-span-full"
           name="summary"
           placeholder="Entrepreneur and educator obsessed with making education free for anyone"
@@ -41,7 +41,7 @@ export const ProfileForm = () => {
           onChange={handleProfileChange}
         />
         <Input
-          label="Phone"
+          label="Numéro de Téléphone"
           labelClassName="col-span-2"
           name="phone"
           placeholder="(123)456-7890"
@@ -49,7 +49,7 @@ export const ProfileForm = () => {
           onChange={handleProfileChange}
         />
         <Input
-          label="Website"
+          label="Site Internet"
           labelClassName="col-span-4"
           name="url"
           placeholder="linkedin.com/in/khanacademy"

@@ -3,6 +3,7 @@ import {
   ResumePDFSection,
   ResumePDFBulletList,
   ResumeFeaturedSkill,
+  ResumePDFText,
 } from "components/Resume/ResumePDF/common";
 import { styles, spacing } from "components/Resume/ResumePDF/styles";
 import type { ResumeSkills } from "lib/redux/types";
@@ -27,7 +28,15 @@ export const ResumePDFSkills = ({
   ];
 
   return (
-    <ResumePDFSection themeColor={themeColor} heading={heading}>
+    <ResumePDFSection>
+      <View style={{ backgroundColor: themeColor, padding: spacing["1"], marginTop: spacing["4"], marginBottom: spacing["2"] }}>
+        <ResumePDFText
+          bold
+          style={{ fontSize: "16pt", color: "white" }}
+        >
+          {heading}
+        </ResumePDFText>
+      </View>
       {featuredSkillsWithText.length > 0 && (
         <View style={{ ...styles.flexRowBetween, marginTop: spacing["0.5"] }}>
           {featuredSkillsPair.map((pair, idx) => (

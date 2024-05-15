@@ -56,8 +56,7 @@ export const ResumePDF = ({
       <ResumePDFWorkExperience
         heading={formToHeading["workExperiences"]}
         workExperiences={workExperiences}
-        themeColor={themeColor}
-      />
+        themeColor={themeColor} showBulletPoints={false}      />
     ),
     educations: () => (
       <ResumePDFEducation

@@ -84,7 +84,7 @@ export const ResumeTable = ({ resume }: { resume: Resume }) => {
             />
           </Fragment>
         ))}
-        <TableRowHeader>Work Experience</TableRowHeader>
+        <TableRowHeader>WORK EXPERIENCE</TableRowHeader>
         {workExperiences.map((workExperience, idx) => (
           <Fragment key={idx}>
             <TableRow label="Company" value={workExperience.company} />

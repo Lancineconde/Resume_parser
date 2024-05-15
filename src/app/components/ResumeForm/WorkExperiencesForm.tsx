@@ -45,18 +45,18 @@ export const WorkExperiencesForm = () => {
             deleteButtonTooltipText="Delete job"
           >
             <Input
-              label="Company"
+              label="Compagnie"
               labelClassName="col-span-full"
               name="company"
-              placeholder="Khan Academy"
+              placeholder="Orange"
               value={company}
               onChange={handleWorkExperienceChange}
             />
             <Input
-              label="Job Title"
+              label="Role"
               labelClassName="col-span-4"
               name="jobTitle"
-              placeholder="Software Engineer"
+              placeholder="Ingenieur Réseau"
               value={jobTitle}
               onChange={handleWorkExperienceChange}
             />
@@ -64,12 +64,12 @@ export const WorkExperiencesForm = () => {
               label="Date"
               labelClassName="col-span-2"
               name="date"
-              placeholder="Jun 2022 - Present"
+              placeholder="Juin 2022 - Maintenant"
               value={date}
               onChange={handleWorkExperienceChange}
             />
             <BulletListTextarea
-              label="Description"
+              label="Details"
               labelClassName="col-span-full"
               name="descriptions"
               placeholder="Bullet points"

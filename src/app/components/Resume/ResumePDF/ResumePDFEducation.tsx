@@ -19,7 +19,15 @@ export const ResumePDFEducation = ({
   showBulletPoints: boolean;
 }) => {
   return (
-    <ResumePDFSection themeColor={themeColor} heading={heading}>
+    <ResumePDFSection>
+      <View style={{ backgroundColor: themeColor, padding: spacing["1"], marginTop: spacing["4"], marginBottom: spacing["2"] }}>
+        <ResumePDFText
+          bold
+          style={{ fontSize: "16pt", color: "white" }}
+        >
+          {heading}
+        </ResumePDFText>
+      </View>
       {educations.map(
         ({ school, degree, date, gpa, descriptions = [] }, idx) => {
           // Hide school name if it is the same as the previous school
@@ -42,7 +50,7 @@ export const ResumePDFEducation = ({
               >
                 <ResumePDFText>{`${
                   gpa
-                    ? `${degree} - ${Number(gpa) ? gpa + " GPA" : gpa}`
+                    ? `${degree} - ${Number(gpa) ? gpa + " de Moyenne Générale" : gpa}`
                     : degree
                 }`}</ResumePDFText>
                 <ResumePDFText>{date}</ResumePDFText>

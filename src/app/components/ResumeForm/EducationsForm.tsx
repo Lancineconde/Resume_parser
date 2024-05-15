@@ -50,10 +50,10 @@ export const EducationsForm = () => {
             deleteButtonTooltipText="Delete school"
           >
             <Input
-              label="School"
+              label="Université"
               labelClassName="col-span-4"
               name="school"
-              placeholder="Cornell University"
+              placeholder="Université La Sorbonne"
               value={school}
               onChange={handleEducationChange}
             />
@@ -66,27 +66,27 @@ export const EducationsForm = () => {
               onChange={handleEducationChange}
             />
             <Input
-              label="Degree & Major"
+              label="License"
               labelClassName="col-span-4"
               name="degree"
-              placeholder="Bachelor of Science in Computer Engineering"
+              placeholder="License en Droits"
               value={degree}
               onChange={handleEducationChange}
             />
             <Input
-              label="GPA"
+              label="Moyenne Générale"
               labelClassName="col-span-2"
               name="gpa"
-              placeholder="3.81"
+              placeholder="16.58"
               value={gpa}
               onChange={handleEducationChange}
             />
             <div className="relative col-span-full">
               <BulletListTextarea
-                label="Additional Information (Optional)"
+                label="Plus de Details (Optionelle)"
                 labelClassName="col-span-full"
                 name="descriptions"
-                placeholder="Free paragraph space to list out additional activities, courses, awards etc"
+                placeholder="Bac+4 en droit commercial"
                 value={descriptions}
                 onChange={handleEducationChange}
                 showBulletPoints={showBulletPoints}
