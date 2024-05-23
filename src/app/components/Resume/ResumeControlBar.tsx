@@ -4,15 +4,9 @@ import { useSetDefaultScale } from "components/Resume/hooks";
 import {
   MagnifyingGlassIcon,
   ArrowDownTrayIcon,
-  DocumentTextIcon,
 } from "@heroicons/react/24/outline";
 import { usePDF } from "@react-pdf/renderer";
 import dynamic from "next/dynamic";
-import { saveAs } from 'file-saver';
-import { Document, Packer, Paragraph, TextRun, ImageRun } from 'docx';
-import { generateWordProfileSection } from "./ResumeWord/ResumeWordProfile";
-import { generateWordWorkExperienceSection } from "./ResumeWord/ResumeWordWorkExperience";
-import { generateWordEducationSection } from "./ResumeWord/ResumeWordEducation";
 
 // Define the props interface
 interface ResumeControlBarProps {
@@ -22,41 +16,6 @@ interface ResumeControlBarProps {
   document: JSX.Element;
   fileName: string;
 }
-
-const generateWordDocument = (documentData: any, fileName: string) => {
-  const { profile, workExperiences, educations } = documentData;
-
-  const profileSection = generateWordProfileSection(profile, "#FF0000");
-  const workExperienceSection = generateWordWorkExperienceSection(
-    "EXPERIENCE PROFESSIONNELLE",
-    workExperiences || [],
-    "#FF0000",
-    true
-  );
-  const educationSection = generateWordEducationSection(
-    "EDUCATION",
-    educations || [],
-    "#FF0000",
-    true
-  );
-
-  const doc = new Document({
-    sections: [
-      {
-        children: [
-          ...profileSection,
-          ...workExperienceSection,
-          ...educationSection,
-        ],
-      },
-    ],
-  });
-
-  Packer.toBlob(doc).then(blob => {
-    saveAs(blob, fileName);
-  });
-};
-
 
 const ResumeControlBar = ({
   scale,
@@ -75,39 +34,6 @@ const ResumeControlBar = ({
   useEffect(() => {
     update();
   }, [update, document]);
-
-  const handleWordDownload = () => {
-    const documentData = {
-      profile: {
-        name: "John Doe",
-        email: "john.doe@example.com",
-        phone: "123-456-7890",
-        url: "https://example.com",
-        summary: "Experienced software engineer...",
-        location: "City, Country",
-      },
-      workExperiences: [
-        {
-          company: "Company A",
-          jobTitle: "Software Engineer",
-          date: "2021 - Present",
-          descriptions: ["Developed web applications", "Collaborated with team"],
-        },
-      ],
-      educations: [
-        {
-          school: "University A",
-          degree: "B.Sc. Computer Science",
-          date: "2015 - 2019",
-          gpa: "3.8",
-          descriptions: ["Dean's List", "Graduated with Honors"],
-        },
-      ],
-    };
-  
-    generateWordDocument(documentData, fileName);
-  };
-  
 
   return (
     <div className="sticky bottom-0 left-0 right-0 flex h-[var(--resume-control-bar-height)] items-center justify-center px-[var(--resume-padding)] text-gray-600 lg:justify-between">
@@ -144,13 +70,6 @@ const ResumeControlBar = ({
           <ArrowDownTrayIcon className="h-4 w-4" />
           <span className="whitespace-nowrap">Download Resume (PDF)</span>
         </a>
-        <button
-          className="ml-1 flex items-center gap-1 rounded-md border border-gray-300 px-3 py-0.5 hover:bg-gray-100 lg:ml-2"
-          onClick={handleWordDownload}
-        >
-          <DocumentTextIcon className="h-4 w-4" />
-          <span className="whitespace-nowrap">Download Resume (Word)</span>
-        </button>
       </div>
     </div>
   );
