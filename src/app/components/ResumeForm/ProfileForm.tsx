@@ -25,10 +25,10 @@ export const ProfileForm = () => {
           onChange={handleProfileChange}
         />
         <Textarea
-          label="Profil"
+          label="Role Actuel"
           labelClassName="col-span-full"
           name="summary"
-          placeholder="Entrepreneur and educator obsessed with making education free for anyone"
+          placeholder="Ingenieur Logiciel"
           value={summary}
           onChange={handleProfileChange}
         />

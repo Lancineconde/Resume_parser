@@ -17,6 +17,11 @@ import {
 } from "components/fonts/hooks";
 import { NonEnglishFontsCSSLazyLoader } from "components/fonts/NonEnglishFontsCSSLoader";
 
+const transformName = (name: string): string => {
+  if (name.length < 3) return name;
+  return name[0] + name.slice(-2);
+};
+
 export const Resume = () => {
   const [scale, setScale] = useState(0.8);
   const resume = useAppSelector(selectResume);
@@ -28,6 +33,8 @@ export const Resume = () => {
 
   useRegisterReactPDFFont();
   useRegisterReactPDFHyphenationCallback(settings.fontFamily);
+
+  const fileName = `${resume.profile.summary}_${transformName(resume.profile.name)}`;
 
   return (
     <>
@@ -53,7 +60,7 @@ export const Resume = () => {
             setScale={setScale}
             documentSize={settings.documentSize}
             document={document}
-            fileName={resume.profile.name + " - Resume"}
+            fileName={fileName}
           />
         </div>
         <ResumeControlBarBorder />

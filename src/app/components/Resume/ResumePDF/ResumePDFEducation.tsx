@@ -21,7 +21,14 @@ export const ResumePDFEducation = ({
   return (
     <ResumePDFSection>
       {/* Display the title "EDUCATION" */}
-      <View style={{ backgroundColor: themeColor, padding: spacing["1"], marginTop: spacing["4"], marginBottom: spacing["2"] }}>
+      <View
+        style={{
+          backgroundColor: themeColor,
+          padding: spacing["1"],
+          marginTop: spacing["4"],
+          marginBottom: spacing["2"],
+        }}
+      >
         <ResumePDFText bold style={{ fontSize: "16pt", color: "white" }}>
           EDUCATION
         </ResumePDFText>
@@ -36,7 +43,10 @@ export const ResumePDFEducation = ({
           return (
             <View key={idx}>
               {!hideSchoolName && (
-                <ResumePDFText bold={true}>{school}</ResumePDFText>
+                <View style={{ ...styles.flexRowBetween, marginTop: spacing["1.5"] }}>
+                  <ResumePDFText bold={true}>{school}</ResumePDFText>
+                  <ResumePDFText style={{ color: 'grey' }}>{date}</ResumePDFText>
+                </View>
               )}
               <View
                 style={{
@@ -51,7 +61,6 @@ export const ResumePDFEducation = ({
                     ? `${degree} - ${Number(gpa) ? gpa + " GPA" : gpa}`
                     : degree
                 }`}</ResumePDFText>
-                <ResumePDFText>{date}</ResumePDFText>
               </View>
               {showDescriptions && (
                 <View style={{ ...styles.flexCol, marginTop: spacing["1.5"] }}>
