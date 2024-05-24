@@ -1,12 +1,19 @@
 "use client";
 import { useEffect } from "react";
 import { useSetDefaultScale } from "components/Resume/hooks";
-import {
-  MagnifyingGlassIcon,
-  ArrowDownTrayIcon,
-} from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import { usePDF } from "@react-pdf/renderer";
 import dynamic from "next/dynamic";
+import { saveAs } from 'file-saver';
+import { Document, Packer, Paragraph } from 'docx';
+import {
+  createProfileSection,
+  createWorkExperienceSection,
+  createEducationSection,
+  createSkillsSection,
+  createProjectsSection
+} from 'utils/docxUtils';
+import { ResumeProfile, ResumeWorkExperience, ResumeEducation, ResumeSkills, ResumeProject } from 'lib/redux/types';
 
 // Define the props interface
 interface ResumeControlBarProps {
@@ -15,6 +22,12 @@ interface ResumeControlBarProps {
   documentSize: string;
   document: JSX.Element;
   fileName: string;
+  profile: ResumeProfile;
+  workExperiences: ResumeWorkExperience[];
+  educations: ResumeEducation[];
+  skills: ResumeSkills;
+  projects: ResumeProject[];
+  themeColor: string;
 }
 
 const ResumeControlBar = ({
@@ -23,6 +36,12 @@ const ResumeControlBar = ({
   documentSize,
   document,
   fileName,
+  profile,
+  workExperiences,
+  educations,
+  skills,
+  projects,
+  themeColor,
 }: ResumeControlBarProps) => {
   const { scaleOnResize, setScaleOnResize } = useSetDefaultScale({
     setScale,
@@ -34,6 +53,41 @@ const ResumeControlBar = ({
   useEffect(() => {
     update();
   }, [update, document]);
+
+  useEffect(() => {
+    console.log("Profile:", profile);
+    console.log("Work Experiences:", workExperiences);
+    console.log("Educations:", educations);
+    console.log("Skills:", skills);
+    console.log("Projects:", projects);
+  }, [profile, workExperiences, educations, skills, projects]);
+
+  const handleWordDownload = () => {
+    const profileSection = createProfileSection();
+    const workExperienceSection = createWorkExperienceSection(themeColor);
+    const educationSection = createEducationSection(themeColor);
+    const skillsSection = createSkillsSection(themeColor);
+    const projectsSection = createProjectsSection(themeColor);
+
+    const doc = new Document({
+      sections: [
+        {
+          properties: {},
+          children: [
+            ...profileSection,
+            ...workExperienceSection,
+            ...educationSection,
+            ...skillsSection,
+            ...projectsSection,
+          ],
+        },
+      ],
+    });
+
+    Packer.toBlob(doc).then((blob) => {
+      saveAs(blob, `${fileName}.docx`);
+    });
+  };
 
   return (
     <div className="sticky bottom-0 left-0 right-0 flex h-[var(--resume-control-bar-height)] items-center justify-center px-[var(--resume-padding)] text-gray-600 lg:justify-between">
@@ -70,6 +124,13 @@ const ResumeControlBar = ({
           <ArrowDownTrayIcon className="h-4 w-4" />
           <span className="whitespace-nowrap">Download Resume (PDF)</span>
         </a>
+        <button
+          className="ml-1 flex items-center gap-1 rounded-md border border-gray-300 px-3 py-0.5 hover:bg-gray-100 lg:ml-8"
+          onClick={handleWordDownload}
+        >
+          <ArrowDownTrayIcon className="h-4 w-4" />
+          <span className="whitespace-nowrap">Download Resume (Word)</span>
+        </button>
       </div>
     </div>
   );

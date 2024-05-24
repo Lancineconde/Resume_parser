@@ -34,7 +34,7 @@ export const Resume = () => {
   useRegisterReactPDFFont();
   useRegisterReactPDFHyphenationCallback(settings.fontFamily);
 
-  const fileName = `${resume.profile.summary}_${transformName(resume.profile.name)}`;
+  const fileName = `${resume.profile.summary.toUpperCase()}_${transformName(resume.profile.name)}`;
 
   return (
     <>
