@@ -47,7 +47,7 @@ export const ResumePDFProfile = ({
     return `${trimmedName[0]}${trimmedName.slice(-2)}`;
   };
 
-  const transformedName = transformName(name);
+  const transformedName = transformName(name).toUpperCase();
 
   return (
     <ResumePDFSection>

@@ -44,7 +44,7 @@ export const ResumePDFWorkExperience = ({
             <View key={idx}>
               {!hideCompanyName && (
                 <View style={{ ...styles.flexRowBetween, marginTop: spacing["1.5"] }}>
-                  <ResumePDFText bold={true}>{company}</ResumePDFText>
+                  <ResumePDFText bold={true} style={{ color: themeColor }}>{company}</ResumePDFText>
                   <ResumePDFText style={{ color: 'grey' }}>{date}</ResumePDFText>
                 </View>
               )}
