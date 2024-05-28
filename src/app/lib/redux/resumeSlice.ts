@@ -51,7 +51,7 @@ export const initialSkills: ResumeSkills = {
 };
 
 export const initialCustom = {
-  descriptions: [],
+  selectedCertifications: [] as number[],
 };
 
 export const initialResumeState: Resume = {
@@ -136,10 +136,10 @@ export const resumeSlice = createSlice({
     },
     changeCustom: (
       draft,
-      action: PayloadAction<{ field: "descriptions"; value: string[] }>
+      action: PayloadAction<{ field: 'selectedCertifications'; value: number[] }>
     ) => {
-      const { value } = action.payload;
-      draft.custom.descriptions = value;
+      const { field, value } = action.payload;
+      draft.custom[field] = value;
     },
     addSectionInForm: (draft, action: PayloadAction<{ form: ShowForm }>) => {
       const { form } = action.payload;

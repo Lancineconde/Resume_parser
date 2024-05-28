@@ -39,7 +39,7 @@ export interface ResumeSkills {
 }
 
 export interface ResumeCustom {
-  descriptions: string[];
+  selectedCertifications: number[];
 }
 
 export interface Resume {
