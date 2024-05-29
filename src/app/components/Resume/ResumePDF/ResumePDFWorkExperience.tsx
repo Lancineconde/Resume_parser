@@ -28,20 +28,21 @@ export const ResumePDFWorkExperience = ({
           marginTop: spacing["4"],
           marginBottom: spacing["2"],
         }}
+        wrap // Enable wrapping here
       >
         <ResumePDFText bold style={{ fontSize: "16pt", color: "white" }}>
           EXPERIENCE PROFESSIONNELLE
         </ResumePDFText>
       </View>
       {workExperiences.map(
-        ({ company, jobTitle, date, descriptions = [] }, idx) => {
+        ({ company, jobTitle, date, descriptions = [], environments }, idx) => {
           // Hide company name if it is the same as the previous company
           const hideCompanyName =
             idx > 0 && company === workExperiences[idx - 1].company;
           const showDescriptions = descriptions.join() !== "";
 
           return (
-            <View key={idx}>
+            <View key={idx} wrap> {/* Enable wrapping here */}
               {!hideCompanyName && (
                 <View style={{ ...styles.flexRowBetween, marginTop: spacing["1.5"] }}>
                   <ResumePDFText bold={true} style={{ color: themeColor }}>{company}</ResumePDFText>
@@ -56,14 +57,20 @@ export const ResumePDFWorkExperience = ({
                     : spacing["1.5"],
                 }}
               >
-                <ResumePDFText>{jobTitle}</ResumePDFText>
+                <ResumePDFText bold={true}>{jobTitle}</ResumePDFText> {/* Make job title bold */}
               </View>
               {showDescriptions && (
-                <View style={{ ...styles.flexCol, marginTop: spacing["1.5"] }}>
+                <View style={{ ...styles.flexCol, marginTop: spacing["1.5"] }} wrap> {/* Enable wrapping here */}
                   <ResumePDFBulletList
                     items={descriptions}
                     showBulletPoints={showBulletPoints}
                   />
+                </View>
+              )}
+              {environments && environments.trim() !== "" && (
+                <View style={{ ...styles.flexCol, marginTop: spacing["1.5"] }} wrap> {/* Enable wrapping here */}
+                  <ResumePDFText bold style={{ marginBottom: spacing["0.5"] }}>Environnements</ResumePDFText>
+                  <ResumePDFText style={{ color: 'grey' }}>{environments}</ResumePDFText>
                 </View>
               )}
             </View>

@@ -56,8 +56,7 @@ export const ResumePDF = ({
       <ResumePDFWorkExperience
         heading={formToHeading["workExperiences"]}
         workExperiences={workExperiences}
-        themeColor={themeColor}
-      />
+        themeColor={themeColor} showBulletPoints={false}      />
     ),
     educations: () => (
       <ResumePDFEducation
@@ -87,7 +86,7 @@ export const ResumePDF = ({
         heading={formToHeading["custom"]}
         custom={custom}
         themeColor={themeColor}
-        showBulletPoints={showBulletPoints["custom"]}
+        // showBulletPoints={showBulletPoints["custom"]}
       />
     ),
   };
@@ -124,10 +123,35 @@ export const ResumePDF = ({
               themeColor={themeColor}
               isPDF={isPDF}
             />
-            {showFormsOrder.map((form) => {
-              const Component = formTypeToComponent[form];
-              return <Component key={form} />;
-            })}
+            {showFormsOrder
+              .filter((form) => form !== "projects" && form !== "skills" && form !== "custom")
+              .map((form) => {
+                const Component = formTypeToComponent[form];
+                return <Component key={form} />;
+              })}
+          </View>
+        </Page>
+        <Page
+          size={documentSize === "A4" ? "A4" : "LETTER"}
+          style={{
+            ...styles.flexCol,
+            color: DEFAULT_FONT_COLOR,
+            fontFamily,
+            fontSize: fontSize + "pt",
+          }}
+        >
+          <View
+            style={{
+              ...styles.flexCol,
+              padding: `${spacing[0]} ${spacing[20]}`,
+            }}
+          >
+            {showFormsOrder
+              .filter((form) => form === "projects" || form === "skills" || form === "custom")
+              .map((form) => {
+                const Component = formTypeToComponent[form];
+                return <Component key={form} />;
+              })}
           </View>
         </Page>
       </Document>

@@ -28,6 +28,7 @@ export const ResumePDFEducation = ({
           marginTop: spacing["4"],
           marginBottom: spacing["2"],
         }}
+        wrap // Enable wrapping here
       >
         <ResumePDFText bold style={{ fontSize: "16pt", color: "white" }}>
           EDUCATION
@@ -41,7 +42,7 @@ export const ResumePDFEducation = ({
           const showDescriptions = descriptions.join() !== "";
 
           return (
-            <View key={idx}>
+            <View key={idx} wrap> {/* Enable wrapping here */}
               {!hideSchoolName && (
                 <View style={{ ...styles.flexRowBetween, marginTop: spacing["1.5"] }}>
                   <ResumePDFText bold={true}>{school}</ResumePDFText>
@@ -63,7 +64,7 @@ export const ResumePDFEducation = ({
                 }`}</ResumePDFText>
               </View>
               {showDescriptions && (
-                <View style={{ ...styles.flexCol, marginTop: spacing["1.5"] }}>
+                <View style={{ ...styles.flexCol, marginTop: spacing["1.5"] }} wrap> {/* Enable wrapping here */}
                   <ResumePDFBulletList
                     items={descriptions}
                     showBulletPoints={showBulletPoints}

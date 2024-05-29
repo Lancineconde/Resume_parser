@@ -30,19 +30,31 @@ export const ResumePDFSkills = ({
   return (
     <ResumePDFSection>
       {/* Display the heading provided in the props */}
-      <View style={{ backgroundColor: themeColor, padding: spacing["1"], marginTop: spacing["4"], marginBottom: spacing["2"] }}>
+      <View
+        style={{
+          backgroundColor: themeColor,
+          padding: spacing["1"],
+          marginTop: spacing["4"],
+          marginBottom: spacing["2"],
+        }}
+        wrap // Ensure wrapping is enabled here
+      >
         <ResumePDFText bold style={{ fontSize: "16pt", color: "white" }}>
           {heading}
         </ResumePDFText>
       </View>
       {featuredSkillsWithText.length > 0 && (
-        <View style={{ ...styles.flexRowBetween, marginTop: spacing["0.5"] }}>
+        <View
+          style={{ ...styles.flexRowBetween, marginTop: spacing["0.5"] }}
+          wrap // Ensure wrapping is enabled here
+        >
           {featuredSkillsPair.map((pair, idx) => (
             <View
               key={idx}
               style={{
                 ...styles.flexCol,
               }}
+              wrap // Ensure wrapping is enabled here
             >
               {pair.map((featuredSkill, idx) => {
                 if (!featuredSkill) return null;
@@ -62,7 +74,7 @@ export const ResumePDFSkills = ({
           ))}
         </View>
       )}
-      <View style={{ ...styles.flexCol }}>
+      <View style={{ ...styles.flexCol }} wrap> {/* Ensure wrapping is enabled here */}
         <ResumePDFBulletList
           items={descriptions}
           showBulletPoints={showBulletPoints}

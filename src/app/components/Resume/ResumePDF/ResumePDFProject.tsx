@@ -19,7 +19,15 @@ export const ResumePDFProject = ({
   return (
     <ResumePDFSection>
       {/* Display the heading provided in the props */}
-      <View style={{ backgroundColor: themeColor, padding: spacing["1"], marginTop: spacing["4"], marginBottom: spacing["2"] }}>
+      <View
+        style={{
+          backgroundColor: themeColor,
+          padding: spacing["1"],
+          marginTop: spacing["4"],
+          marginBottom: spacing["2"],
+        }}
+        wrap // Ensure wrapping is enabled here
+      >
         <ResumePDFText bold style={{ fontSize: "16pt", color: "white" }}>
           {heading}
         </ResumePDFText>
@@ -37,13 +45,32 @@ export const ResumePDFProject = ({
 
       {/* Table Rows */}
       {projects.map(({ project, descriptions }, idx) => (
-        <View key={idx} style={{ flexDirection: "row", borderBottomWidth: 1, borderBottomColor: themeColor }}>
+        <View
+          key={idx}
+          style={{
+            flexDirection: "row",
+            borderBottomWidth: 1,
+            borderBottomColor: themeColor,
+          }}
+          wrap // Ensure wrapping is enabled here
+        >
           {/* Column for project */}
-          <View style={{ width: "50%", padding: spacing["0.5"], borderRightWidth: 1, borderRightColor: themeColor }}>
+          <View
+            style={{
+              width: "50%",
+              padding: spacing["0.5"],
+              borderRightWidth: 1,
+              borderRightColor: themeColor,
+            }}
+            wrap // Ensure wrapping is enabled here
+          >
             <ResumePDFText>{project}</ResumePDFText>
           </View>
           {/* Column for descriptions */}
-          <View style={{ width: "50%", padding: spacing["0.5"] }}>
+          <View
+            style={{ width: "50%", padding: spacing["0.5"] }}
+            wrap // Ensure wrapping is enabled here
+          >
             <ResumePDFBulletList items={descriptions} />
           </View>
         </View>

@@ -19,7 +19,7 @@ export const WorkExperiencesForm = () => {
 
   return (
     <Form form="workExperiences" addButtonText="Ajouter">
-      {workExperiences.map(({ company, jobTitle, date, descriptions }, idx) => {
+      {workExperiences.map(({ company, jobTitle, date, descriptions, environments }, idx) => {
         const handleWorkExperienceChange = (
           ...[
             field,
@@ -74,6 +74,14 @@ export const WorkExperiencesForm = () => {
               name="descriptions"
               placeholder="Bullet points"
               value={descriptions}
+              onChange={handleWorkExperienceChange}
+            />
+            <Input
+              label="Environments"
+              labelClassName="col-span-full"
+              name="environments"
+              placeholder="Windows, Linux, AWS"
+              value={environments}
               onChange={handleWorkExperienceChange}
             />
           </FormSection>

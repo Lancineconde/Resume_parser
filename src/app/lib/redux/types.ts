@@ -12,6 +12,7 @@ export interface ResumeWorkExperience {
   jobTitle: string;
   date: string;
   descriptions: string[];
+  environments: string; // Add this line
 }
 
 export interface ResumeEducation {
@@ -39,7 +40,7 @@ export interface ResumeSkills {
 }
 
 export interface ResumeCustom {
-  selectedCertifications: number[];
+  selectedCertifications: string[];
 }
 
 export interface Resume {

@@ -8,6 +8,7 @@ import type {
   ResumeProject,
   ResumeSkills,
   ResumeWorkExperience,
+  ResumeCustom,
 } from "lib/redux/types";
 import type { ShowForm } from "lib/redux/settingsSlice";
 
@@ -25,6 +26,7 @@ export const initialWorkExperience: ResumeWorkExperience = {
   jobTitle: "",
   date: "",
   descriptions: [],
+  environments: "", // Add this line
 };
 
 export const initialEducation: ResumeEducation = {
@@ -50,8 +52,8 @@ export const initialSkills: ResumeSkills = {
   descriptions: [],
 };
 
-export const initialCustom = {
-  selectedCertifications: [] as number[],
+export const initialCustom: ResumeCustom = {
+  selectedCertifications: [], // Updated to string[]
 };
 
 export const initialResumeState: Resume = {
@@ -136,7 +138,7 @@ export const resumeSlice = createSlice({
     },
     changeCustom: (
       draft,
-      action: PayloadAction<{ field: 'selectedCertifications'; value: number[] }>
+      action: PayloadAction<{ field: 'selectedCertifications'; value: string[] }>
     ) => {
       const { field, value } = action.payload;
       draft.custom[field] = value;

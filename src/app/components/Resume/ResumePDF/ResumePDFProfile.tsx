@@ -10,10 +10,12 @@ export const ResumePDFProfile = ({
   profile,
   themeColor,
   isPDF,
+  certifications = [],
 }: {
   profile: ResumeProfile;
   themeColor: string;
   isPDF: boolean;
+  certifications?: string[];
 }) => {
   const { name, email, phone, url, summary, location } = profile;
   const iconProps = { email, phone, location, url };
@@ -69,9 +71,15 @@ export const ResumePDFProfile = ({
           8 rue des frères Caudron – 78140 Vélizy-Villacoublay
         </Text>
       </View>
-      <View style={{ ...styles.flexRowBetween, flexWrap: "wrap" }}>
-        <View style={{ flex: 1 }}></View>
-        <View style={{ flex: 1, alignItems: "flex-end" }}>
+      <View style={{ ...styles.flexRowBetween, flexWrap: "wrap" }} wrap>
+        <View style={{ flex: 1, alignItems: "flex-start", flexDirection: "row", flexWrap: "wrap" }} wrap>
+          {certifications.map((cert, index) => (
+            <Text key={index} style={{ fontSize: "10pt", color: themeColor, marginRight: spacing["1"] }}>
+              {cert}
+            </Text>
+          ))}
+        </View>
+        <View style={{ flex: 1, alignItems: "flex-end" }} wrap>
           <ResumePDFText bold themeColor={themeColor} style={{ fontSize: "18pt" }}>
             {transformedName}
           </ResumePDFText>
@@ -93,7 +101,7 @@ export const ResumePDFProfile = ({
             }
 
             return (
-              <View key={key} style={{ ...styles.flexRow, alignItems: "center", gap: spacing["1"], marginTop: spacing["0.5"] }}>
+              <View key={key} style={{ ...styles.flexRow, alignItems: "center", gap: spacing["1"], marginTop: spacing["0.5"] }} wrap>
                 <ResumePDFIcon type={iconType} isPDF={isPDF} />
                 <Wrapper type={key} value={value}>
                   <ResumePDFText>{value}</ResumePDFText>
@@ -106,7 +114,7 @@ export const ResumePDFProfile = ({
       </View>
       {/* Commented out the "PROFIL" section */}
       {/*
-      <View style={{ backgroundColor: themeColor, padding: spacing["1"], marginTop: spacing["4"], marginBottom: spacing["2"] }}>
+      <View style={{ backgroundColor: themeColor, padding: spacing["1"], marginTop: spacing["4"], marginBottom: spacing["2"] }} wrap>
         <ResumePDFText bold style={{ fontSize: "16pt", color: "white" }}>
           PROFIL
         </ResumePDFText>
