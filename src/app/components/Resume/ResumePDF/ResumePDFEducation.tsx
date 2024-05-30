@@ -31,7 +31,7 @@ export const ResumePDFEducation = ({
         wrap // Enable wrapping here
       >
         <ResumePDFText bold style={{ fontSize: "16pt", color: "white" }}>
-          EDUCATION
+          FORMATION
         </ResumePDFText>
       </View>
       {educations.map(
@@ -46,7 +46,7 @@ export const ResumePDFEducation = ({
               {!hideSchoolName && (
                 <View style={{ ...styles.flexRowBetween, marginTop: spacing["1.5"] }}>
                   <ResumePDFText bold={true}>{school}</ResumePDFText>
-                  <ResumePDFText style={{ color: 'grey' }}>{date}</ResumePDFText>
+                  <ResumePDFText style={{ color: themeColor}}>{date}</ResumePDFText>
                 </View>
               )}
               <View

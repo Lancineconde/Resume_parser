@@ -48,7 +48,10 @@ export const extractWorkExperience = (sections: ResumeSectionToLines) => {
     const subsectionDescriptionsLines = subsectionLines.slice(descriptionsLineIdx);
     const descriptions = getBulletPointsFromLines(subsectionDescriptionsLines);
 
-    workExperiences.push({ company, jobTitle, date, descriptions });
+    workExperiences.push({
+      company, jobTitle, date, descriptions,
+      environments: ""
+    });
     workExperiencesScores.push({
       companyScores,
       jobTitleScores,

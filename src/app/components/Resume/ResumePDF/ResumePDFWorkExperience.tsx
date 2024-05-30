@@ -16,7 +16,7 @@ export const ResumePDFWorkExperience = ({
   heading: string;
   workExperiences: ResumeWorkExperience[];
   themeColor: string;
-  showBulletPoints: boolean;
+  showBulletPoints: true;
 }) => {
   return (
     <ResumePDFSection>
@@ -46,7 +46,7 @@ export const ResumePDFWorkExperience = ({
               {!hideCompanyName && (
                 <View style={{ ...styles.flexRowBetween, marginTop: spacing["1.5"] }}>
                   <ResumePDFText bold={true} style={{ color: themeColor }}>{company}</ResumePDFText>
-                  <ResumePDFText style={{ color: 'grey' }}>{date}</ResumePDFText>
+                  <ResumePDFText style={{ color: themeColor }}>{date}</ResumePDFText>
                 </View>
               )}
               <View
@@ -63,7 +63,7 @@ export const ResumePDFWorkExperience = ({
                 <View style={{ ...styles.flexCol, marginTop: spacing["1.5"] }} wrap> {/* Enable wrapping here */}
                   <ResumePDFBulletList
                     items={descriptions}
-                    showBulletPoints={true} // Explicitly show bullet points
+                    showBulletPoints={showBulletPoints}
                   />
                 </View>
               )}

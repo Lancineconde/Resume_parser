@@ -11,15 +11,15 @@ export const ResumePDFCustom = ({
 
   return (
     <ResumePDFSection>
-      <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: -55 }}>
+      <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: -45 }}>
         {selectedCertifications.map((cert, index) => (
           <View key={index} style={{ flexDirection: "row", alignItems: "center", marginRight: 10, marginBottom: 10 }}>
             <Image
               src={cert}
               style={{
-                marginRight: 5,
-                width: "35px",
-                height: "35px",
+                marginRight:5,
+                width: "75px",
+                height: "75px",
               }}
             />
           </View>

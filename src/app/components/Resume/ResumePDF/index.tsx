@@ -33,7 +33,7 @@ export const ResumePDF = ({
         heading={formToHeading["workExperiences"]}
         workExperiences={workExperiences}
         themeColor={themeColor}
-        showBulletPoints={false} />
+        showBulletPoints={true} />
     ),
     educations: () => (
       <ResumePDFEducation
