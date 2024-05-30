@@ -1,6 +1,5 @@
 import { View, Image } from "@react-pdf/renderer";
 import { ResumePDFSection } from "components/Resume/ResumePDF/common";
-import { spacing } from "components/Resume/ResumePDF/styles";
 import type { ResumeCustom } from "lib/redux/types";
 
 export const ResumePDFCustom = ({
@@ -12,15 +11,15 @@ export const ResumePDFCustom = ({
 
   return (
     <ResumePDFSection>
-      <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: spacing["1.5"] }}>
+      <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: -55 }}>
         {selectedCertifications.map((cert, index) => (
-          <View key={index} style={{ flexDirection: "row", alignItems: "center", marginRight: spacing["1.5"], marginBottom: spacing["1.5"] }}>
+          <View key={index} style={{ flexDirection: "row", alignItems: "center", marginRight: 10, marginBottom: 10 }}>
             <Image
               src={cert}
               style={{
-                marginRight: spacing["1"],
-                width: "25px",
-                height: "25px",
+                marginRight: 5,
+                width: "35px",
+                height: "35px",
               }}
             />
           </View>

@@ -8,21 +8,19 @@ export const Hero = () => {
       <FlexboxSpacer maxWidth={75} minWidth={0} className="hidden lg:block" />
       <div className="mx-auto max-w-xl pt-8 text-center lg:mx-0 lg:grow lg:pt-32 lg:text-left">
         <h1 className="text-primary pb-2 text-4xl font-bold lg:text-5xl">
-          Create a professional
-          <br />
-          resume easily
+        Créer un CV professionnel facilement
         </h1>
         <p className="mt-3 text-lg lg:mt-5 lg:text-xl">
-          With this free, open-source, and powerful resume builder
+        Avec ce générateur de CV gratuit, open source et puissant
         </p>
         <Link href="/resume-import" className="btn-primary mt-6 lg:mt-14">
-          Create Resume <span aria-hidden="true">→</span>
+        Créer un CV <span aria-hidden="true">→</span>
         </Link>
-        <p className="ml-6 mt-3 text-sm text-gray-600">No sign up required</p>
+        <p className="ml-6 mt-3 text-sm text-gray-600">Pas besoin de s'enregistrer</p>
         <p className="mt-3 text-sm text-gray-600 lg:mt-36">
-          Already have a resume? Test its ATS readability with the{" "}
+        Vous avez déjà un CV ? Testez sa lisibilité ATS avec le{" "}
           <Link href="/resume-parser" className="underline underline-offset-2">
-            resume parser
+            l'analyseur de CV
           </Link>
         </p>
       </div>

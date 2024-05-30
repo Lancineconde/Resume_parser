@@ -31,7 +31,7 @@ export const ResumePDFWorkExperience = ({
         wrap // Enable wrapping here
       >
         <ResumePDFText bold style={{ fontSize: "16pt", color: "white" }}>
-          EXPERIENCE PROFESSIONNELLE
+          EXPERIENCES PROFESSIONNELLES
         </ResumePDFText>
       </View>
       {workExperiences.map(
@@ -63,7 +63,7 @@ export const ResumePDFWorkExperience = ({
                 <View style={{ ...styles.flexCol, marginTop: spacing["1.5"] }} wrap> {/* Enable wrapping here */}
                   <ResumePDFBulletList
                     items={descriptions}
-                    showBulletPoints={showBulletPoints}
+                    showBulletPoints={true} // Explicitly show bullet points
                   />
                 </View>
               )}
