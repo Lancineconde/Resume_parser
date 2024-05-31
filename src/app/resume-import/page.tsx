@@ -42,14 +42,14 @@ export default function ImportResume() {
             {!hasAddedResume && (
               <>
                 <SectionWithHeadingAndCreateButton
-                  heading="You have data saved in browser from prior session"
-                  buttonText="Continue where I left off"
+                  heading="Vous avez des données enregistrées dans le navigateur lors d'une session précédente"
+                  buttonText="Continuer où je me suis arrêté"
                 />
                 <OrDivider />
               </>
             )}
             <h1 className="font-semibold text-gray-900">
-              Override data with a new resume
+              Remplacer les données par un nouveau CV
             </h1>
             <ResumeDropzone
               onFileUrlChange={onFileUrlChange}
@@ -65,7 +65,7 @@ export default function ImportResume() {
 const OrDivider = () => (
   <div className="mx-[-2.5rem] flex items-center pb-6 pt-8" aria-hidden="true">
     <div className="flex-grow border-t border-gray-200" />
-    <span className="mx-2 mt-[-2px] flex-shrink text-lg text-gray-400">or</span>
+    <span className="mx-2 mt-[-2px] flex-shrink text-lg text-gray-400">ou</span>
     <div className="flex-grow border-t border-gray-200" />
   </div>
 );

@@ -16,13 +16,7 @@ export const Hero = () => {
         <Link href="/resume-import" className="btn-primary mt-6 lg:mt-14">
         Créer un CV <span aria-hidden="true">→</span>
         </Link>
-        <p className="ml-6 mt-3 text-sm text-gray-600">Pas besoin de s'enregistrer</p>
-        <p className="mt-3 text-sm text-gray-600 lg:mt-36">
-        Vous avez déjà un CV ? Testez sa lisibilité ATS avec le{" "}
-          <Link href="/resume-parser" className="underline underline-offset-2">
-            l'analyseur de CV
-          </Link>
-        </p>
+        
       </div>
       <FlexboxSpacer maxWidth={100} minWidth={50} className="hidden lg:block" />
       <div className="mt-6 flex justify-center lg:mt-4 lg:block lg:grow">
