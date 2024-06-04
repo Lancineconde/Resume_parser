@@ -9,16 +9,16 @@ export const TopNavBar = () => {
   return (
     <header
       aria-label="Site Header"
-      className="flex h-[var(--top-nav-bar-height)] items-center border-b-2 border-gray-100 px-3 lg:px-12"
+      className="flex h-24 items-center border-b-2 border-gray-100 px-3 lg:px-12"
       style={{ backgroundColor: '#00008B' }} 
     >
-      <div className="flex h-10 w-full items-center justify-between">
+      <div className="flex h-14 w-full items-center justify-between">
         <Link href="/">
           <span className="sr-only">OpenResume</span>
           <Image
             src={logoSrc}
             alt="OpenResume Logo"
-            className="h-8 w-full"
+            className="h-20 w-full"
             priority
           />
         </Link>

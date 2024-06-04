@@ -1,4 +1,4 @@
-import { Paragraph, TextRun, ShadingType, AlignmentType, Table, TableRow, TableCell, WidthType } from 'docx';
+import { Paragraph, TextRun, ShadingType, AlignmentType } from 'docx';
 
 // Profile Section
 export const createProfileSection = (): Paragraph[] => {
@@ -12,6 +12,7 @@ export const createProfileSection = (): Paragraph[] => {
         new TextRun({ text: `\n${jobTitle}`, break: 1 }),
       ],
       spacing: { after: 200 },
+      indent: { firstLine: 720 },  // Indentation
     }),
   ];
 
@@ -65,6 +66,7 @@ export const createWorkExperienceSection = (themeColor: string): Paragraph[] => 
       },
       alignment: AlignmentType.CENTER,
       spacing: { after: 200 },
+      pageBreakBefore: true,  // Start a new page before this paragraph if necessary
     }),
     ...workExperiences.map(({ company, jobTitle, date, descriptions = [] }) => {
       return [
@@ -73,24 +75,29 @@ export const createWorkExperienceSection = (themeColor: string): Paragraph[] => 
             new TextRun({ text: company, bold: true, size: 20 }),
           ],
           spacing: { after: 100 },
+          indent: { firstLine: 720 },  // Indentation
         }),
         new Paragraph({
           children: [
             new TextRun({ text: date, color: '888888', size: 18 }),
           ],
           spacing: { after: 100 },
+          indent: { firstLine: 720 },  // Indentation
         }),
         new Paragraph({
           children: [
             new TextRun({ text: jobTitle, italics: true, size: 20 }),
           ],
           spacing: { after: 100 },
+          indent: { firstLine: 720 },  // Indentation
         }),
         ...descriptions.map(description => new Paragraph({
           children: [
             new TextRun({ text: `• ${description}`, size: 20 }),
           ],
           spacing: { after: 100 },
+          indent: { firstLine: 720 },  // Indentation
+          keepNext: true,  // Keep this paragraph with the next one
         })),
       ];
     }).flat(),
@@ -124,6 +131,7 @@ export const createEducationSection = (themeColor: string): Paragraph[] => {
       },
       alignment: AlignmentType.CENTER,
       spacing: { after: 200 },
+      pageBreakBefore: true,  // Start a new page before this paragraph if necessary
     }),
     ...educations.map(({ school, degree, date, gpa, descriptions = [] }) => {
       return [
@@ -132,24 +140,29 @@ export const createEducationSection = (themeColor: string): Paragraph[] => {
             new TextRun({ text: school, bold: true, size: 20 }),
           ],
           spacing: { after: 100 },
+          indent: { firstLine: 720 },  // Indentation
         }),
         new Paragraph({
           children: [
             new TextRun({ text: date, color: '888888', size: 18 }),
           ],
           spacing: { after: 100 },
+          indent: { firstLine: 720 },  // Indentation
         }),
         new Paragraph({
           children: [
             new TextRun({ text: degree, italics: true, size: 20 }),
           ],
           spacing: { after: 100 },
+          indent: { firstLine: 720 },  // Indentation
         }),
         ...descriptions.map(description => new Paragraph({
           children: [
             new TextRun({ text: `• ${description}`, size: 20 }),
           ],
           spacing: { after: 100 },
+          indent: { firstLine: 720 },  // Indentation
+          keepNext: true,  // Keep this paragraph with the next one
         })),
       ];
     }).flat(),
@@ -184,6 +197,7 @@ export const createSkillsSection = (themeColor: string): Paragraph[] => {
       },
       alignment: AlignmentType.CENTER,
       spacing: { after: 200 },
+      pageBreakBefore: true,  // Start a new page before this paragraph if necessary
     }),
     ...skills.featuredSkills.map(skill => new Paragraph({
       children: [
@@ -191,12 +205,14 @@ export const createSkillsSection = (themeColor: string): Paragraph[] => {
         new TextRun({ text: `: ${skill.description}`, size: 20 }),
       ],
       spacing: { after: 100 },
+      indent: { firstLine: 720 },  // Indentation
     })),
     ...skills.descriptions.map(description => new Paragraph({
       children: [
         new TextRun({ text: description, size: 20 }),
       ],
       spacing: { after: 100 },
+      indent: { firstLine: 720 },  // Indentation
     })),
   ];
 
@@ -225,6 +241,7 @@ export const createProjectsSection = (themeColor: string): Paragraph[] => {
       },
       alignment: AlignmentType.CENTER,
       spacing: { after: 200 },
+      pageBreakBefore: true,  // Start a new page before this paragraph if necessary
     }),
     ...projects.map(({ project, descriptions = [] }) => {
       return [
@@ -233,12 +250,15 @@ export const createProjectsSection = (themeColor: string): Paragraph[] => {
             new TextRun({ text: project, bold: true, size: 20 }),
           ],
           spacing: { after: 100 },
+          indent: { firstLine: 720 },  // Indentation
         }),
         ...descriptions.map(description => new Paragraph({
           children: [
             new TextRun({ text: `• ${description}`, size: 20 }),
           ],
           spacing: { after: 100 },
+          indent: { firstLine: 720 },  // Indentation
+          keepNext: true,  // Keep this paragraph with the next one
         })),
       ];
     }).flat(),

@@ -23,6 +23,12 @@ const JOB_TITLE_FEATURE_SET: FeatureSet[] = [
   [hasMoreThan5Words, -2],
 ];
 
+const COMPANY_FEATURE_SET: FeatureSet[] = [
+  [isBold, 2],
+  [hasJobTitle, -4],
+  [hasNumber, -3],
+];
+
 export const extractWorkExperience = (sections: ResumeSectionToLines) => {
   const workExperiences: ResumeWorkExperience[] = [];
   const workExperiencesScores = [];
@@ -36,21 +42,19 @@ export const extractWorkExperience = (sections: ResumeSectionToLines) => {
     const subsectionInfoTextItems = subsectionLines.slice(0, descriptionsLineIdx).flat();
     const [date, dateScores] = getTextWithHighestFeatureScore(subsectionInfoTextItems, DATE_FEATURE_SETS);
     const [jobTitle, jobTitleScores] = getTextWithHighestFeatureScore(subsectionInfoTextItems, JOB_TITLE_FEATURE_SET);
-
-    const COMPANY_FEATURE_SET: FeatureSet[] = [
-      [isBold, 2],
-      [getHasText(date), -4],
-      [getHasText(jobTitle), -4],
-    ];
-
     const [company, companyScores] = getTextWithHighestFeatureScore(subsectionInfoTextItems, COMPANY_FEATURE_SET, false);
 
     const subsectionDescriptionsLines = subsectionLines.slice(descriptionsLineIdx);
     const descriptions = getBulletPointsFromLines(subsectionDescriptionsLines);
 
+    const environments = subsectionLines
+      .flat()
+      .filter(item => item.text.toLowerCase().includes('environnements') || item.text.toLowerCase().includes('environments'))
+      .map(item => item.text.replace('Environnements:', '').replace('Environments:', '').trim())
+      .join(', ');
+
     workExperiences.push({
-      company, jobTitle, date, descriptions,
-      environments: ""
+      company, jobTitle, date, descriptions, environments
     });
     workExperiencesScores.push({
       companyScores,

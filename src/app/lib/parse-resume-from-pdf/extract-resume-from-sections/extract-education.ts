@@ -29,12 +29,15 @@ import {
 const SCHOOLS = ['College', 'University', 'Institute', 'School', 'Academy', 'BASIS', 'Magnet', 'École', 'Université', 'Institut'];
 const hasSchool = (item: TextItem) =>
   SCHOOLS.some((school) => item.text.includes(school));
+
 // prettier-ignore
 const DEGREES = ["Associate", "Bachelor", "Master", "PhD", "Ph.", 'Licence', 'Maîtrise', 'Doctorat'];
 const hasDegree = (item: TextItem) =>
   DEGREES.some((degree) => item.text.includes(degree)) ||
   /[ABM][A-Z\.]/.test(item.text); // Match AA, B.S., MBA, etc.
+
 const matchGPA = (item: TextItem) => item.text.match(/[0-4]\.\d{1,2}/);
+
 const matchGrade = (item: TextItem) => {
   const grade = parseFloat(item.text);
   if (Number.isFinite(grade) && grade <= 110) {
@@ -65,10 +68,14 @@ const GPA_FEATURE_SETS: FeatureSet[] = [
 export const extractEducation = (sections: ResumeSectionToLines) => {
   const educations: ResumeEducation[] = [];
   const educationsScores = [];
+  
+  // Get education lines based on keywords
   const lines = getSectionLinesByKeywords(sections, ["education", "formation"]);
   const subsections = divideSectionIntoSubsections(lines);
+  
   for (const subsectionLines of subsections) {
     const textItems = subsectionLines.flat();
+    
     const [school, schoolScores] = getTextWithHighestFeatureScore(
       textItems,
       SCHOOL_FEATURE_SETS
@@ -88,6 +95,7 @@ export const extractEducation = (sections: ResumeSectionToLines) => {
 
     let descriptions: string[] = [];
     const descriptionsLineIdx = getDescriptionsLineIdx(subsectionLines);
+    
     if (descriptionsLineIdx !== undefined) {
       const descriptionsLines = subsectionLines.slice(descriptionsLineIdx);
       descriptions = getBulletPointsFromLines(descriptionsLines);
@@ -102,8 +110,10 @@ export const extractEducation = (sections: ResumeSectionToLines) => {
     });
   }
 
+  // Adding courses information to the first education entry if available
   if (educations.length !== 0) {
     const coursesLines = getSectionLinesByKeywords(sections, ["course", "cours"]);
+    
     if (coursesLines.length !== 0) {
       educations[0].descriptions.push(
         "Courses: " +
