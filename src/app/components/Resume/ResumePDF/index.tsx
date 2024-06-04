@@ -11,6 +11,8 @@ import type { Settings, ShowForm } from "lib/redux/settingsSlice";
 import type { Resume } from "lib/redux/types";
 import { SuppressResumePDFErrorMessage } from "components/Resume/ResumePDF/common/SuppressResumePDFErrorMessage";
 
+// Define a new default theme color
+
 export const ResumePDF = ({
   resume,
   settings,
@@ -21,7 +23,6 @@ export const ResumePDF = ({
   isPDF?: boolean;
 }) => {
   const { profile, workExperiences, educations, projects, skills, custom } = resume;
-  const { name } = profile;
   const { fontFamily, fontSize, documentSize, formToHeading, formToShow, formsOrder, showBulletPoints } = settings;
   const themeColor = settings.themeColor || DEFAULT_FONT_COLOR;
 
@@ -47,12 +48,21 @@ export const ResumePDF = ({
         custom={custom}
         />
     ),
-    projects: function (): JSX.Element {
-      throw new Error("Function not implemented.");
-    },
-    skills: function (): JSX.Element {
-      throw new Error("Function not implemented.");
-    }
+    projects: () => (
+      <ResumePDFProject
+        heading={formToHeading["projects"]}
+        projects={projects}
+        themeColor={themeColor}
+      />
+    ),
+    skills: () => (
+      <ResumePDFSkills
+        heading={formToHeading["skills"]}
+        skills={skills}
+        themeColor={themeColor}
+        showBulletPoints={showBulletPoints["skills"]}
+      />
+    ),
   };
 
   return (
@@ -60,12 +70,7 @@ export const ResumePDF = ({
       <Document>
         <Page
           size={documentSize === "A4" ? "A4" : "LETTER"}
-          style={{
-            ...styles.flexCol,
-            color: DEFAULT_FONT_COLOR,
-            fontFamily,
-            fontSize: fontSize + "pt",
-          }}
+          style={styles.page} // Apply the page style
         >
           {Boolean(settings.themeColor) && (
             <View
@@ -97,12 +102,7 @@ export const ResumePDF = ({
         </Page>
         <Page
           size={documentSize === "A4" ? "A4" : "LETTER"}
-          style={{
-            ...styles.flexCol,
-            color: DEFAULT_FONT_COLOR,
-            fontFamily,
-            fontSize: fontSize + "pt",
-          }}
+          style={styles.page} // Apply the page style
         >
           <View
             style={{

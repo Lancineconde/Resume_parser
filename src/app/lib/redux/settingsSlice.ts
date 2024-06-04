@@ -60,7 +60,7 @@ export const initialSettings: Settings = {
     skills: "SAVOIR FAIRE",
     custom: "CUSTOM SECTION",
   },
-  formsOrder: ["workExperiences", "educations", "projects", "skills", "custom"],
+  formsOrder: ["custom","workExperiences","educations", "projects", "skills"],
   showBulletPoints: {
     educations: true,
     projects: true,

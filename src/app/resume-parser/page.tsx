@@ -8,9 +8,7 @@ import { extractResumeFromSections } from "lib/parse-resume-from-pdf/extract-res
 import { ResumeDropzone } from "components/ResumeDropzone";
 import { cx } from "lib/cx";
 import { Heading, Link, Paragraph } from "components/documentation";
-import { ResumeTable } from "resume-parser/ResumeTable";
 import { FlexboxSpacer } from "components/FlexboxSpacer";
-import { ResumeParserAlgorithmArticle } from "resume-parser/ResumeParserAlgorithmArticle";
 
 const RESUME_EXAMPLES = [
   {
@@ -117,12 +115,8 @@ export default function ResumeParser() {
             <Heading level={2} className="!mt-[1.2em]">
               Resume Parsing Results
             </Heading>
-            <ResumeTable resume={resume} />
-            <ResumeParserAlgorithmArticle
-              textItems={textItems}
-              lines={lines}
-              sections={sections}
-            />
+            
+
             <div className="pt-24" />
           </section>
         </div>

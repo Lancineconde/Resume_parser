@@ -59,4 +59,16 @@ export const styles = StyleSheet.create({
     height: "13pt",
     fill: "#525252", // text-neutral-600
   },
+  section: {
+    marginBottom: spacing[4], // Example margin
+  },
+  heading: {
+    fontSize: spacing[10], // Adjust as needed
+    marginBottom: spacing[6], // Adjust as needed
+  },
+  page: {
+    paddingTop: spacing[12], // Add top padding to every page
+    paddingBottom: spacing[12],
+    paddingHorizontal: spacing[6],
+  },
 });
