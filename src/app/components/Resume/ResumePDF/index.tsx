@@ -11,7 +11,11 @@ import type { Settings, ShowForm } from "lib/redux/settingsSlice";
 import type { Resume } from "lib/redux/types";
 import { SuppressResumePDFErrorMessage } from "components/Resume/ResumePDF/common/SuppressResumePDFErrorMessage";
 
-// Define a new default theme color
+const transformName = (name: string): string => {
+  if (name.length < 3) return name;
+  return name[0] + name.slice(-2);
+};
+
 
 export const ResumePDF = ({
   resume,
@@ -27,6 +31,8 @@ export const ResumePDF = ({
   const themeColor = settings.themeColor || DEFAULT_FONT_COLOR;
 
   const showFormsOrder = formsOrder.filter((form) => formToShow[form]);
+
+  const fileName = `${resume.profile.summary.toUpperCase()}_${transformName(resume.profile.name)}`;
 
   const formTypeToComponent: { [type in ShowForm]: () => JSX.Element } = {
     workExperiences: () => (
@@ -67,10 +73,20 @@ export const ResumePDF = ({
 
   return (
     <>
-      <Document>
+      <Document
+        title={fileName}
+        author="R&S TELECOM"
+        subject="R&S TELECOM"
+        keywords="R&S TELECOM"
+        producer="R&S TELECOM"
+        creator="R&S TELECOM"
+      >
         <Page
           size={documentSize === "A4" ? "A4" : "LETTER"}
-          style={styles.page} // Apply the page style
+          style={{...styles.flexCol,
+            color: DEFAULT_FONT_COLOR,
+            fontFamily,
+            fontSize: fontSize + "pt",}} 
         >
           {Boolean(settings.themeColor) && (
             <View
@@ -102,7 +118,10 @@ export const ResumePDF = ({
         </Page>
         <Page
           size={documentSize === "A4" ? "A4" : "LETTER"}
-          style={styles.page} // Apply the page style
+          style={{...styles.flexCol,
+            color: DEFAULT_FONT_COLOR,
+            fontFamily,
+            fontSize: fontSize + "pt",}} 
         >
           <View
             style={{
