@@ -16,7 +16,6 @@ const transformName = (name: string): string => {
   return name[0] + name.slice(-2);
 };
 
-
 export const ResumePDF = ({
   resume,
   settings,
@@ -40,19 +39,21 @@ export const ResumePDF = ({
         heading={formToHeading["workExperiences"]}
         workExperiences={workExperiences}
         themeColor={themeColor}
-        showBulletPoints={true} />
+        showBulletPoints={true}
+      />
     ),
     educations: () => (
       <ResumePDFEducation
         heading={formToHeading["educations"]}
         educations={educations}
         themeColor={themeColor}
-        showBulletPoints={showBulletPoints["educations"]} />
+        showBulletPoints={showBulletPoints["educations"]}
+      />
     ),
     custom: () => (
       <ResumePDFCustom
         custom={custom}
-        />
+      />
     ),
     projects: () => (
       <ResumePDFProject
@@ -83,10 +84,14 @@ export const ResumePDF = ({
       >
         <Page
           size={documentSize === "A4" ? "A4" : "LETTER"}
-          style={{...styles.flexCol,
+          style={{
+            ...styles.flexCol,
             color: DEFAULT_FONT_COLOR,
             fontFamily,
-            fontSize: fontSize + "pt",}} 
+            fontSize: fontSize + "pt",
+            paddingBottom: spacing[10], // Add padding at the bottom
+          }}
+          wrap={false}
         >
           {Boolean(settings.themeColor) && (
             <View
@@ -101,7 +106,9 @@ export const ResumePDF = ({
             style={{
               ...styles.flexCol,
               padding: `${spacing[0]} ${spacing[20]}`,
+              paddingBottom: spacing[10], // Add padding at the bottom
             }}
+            wrap={false}
           >
             <ResumePDFProfile
               profile={profile}
@@ -114,21 +121,6 @@ export const ResumePDF = ({
                 const Component = formTypeToComponent[form];
                 return <Component key={form} />;
               })}
-          </View>
-        </Page>
-        <Page
-          size={documentSize === "A4" ? "A4" : "LETTER"}
-          style={{...styles.flexCol,
-            color: DEFAULT_FONT_COLOR,
-            fontFamily,
-            fontSize: fontSize + "pt",}} 
-        >
-          <View
-            style={{
-              ...styles.flexCol,
-              padding: `${spacing[0]} ${spacing[20]}`,
-            }}
-          >
             {formToShow["projects"] && (
               <ResumePDFProject
                 heading={formToHeading["projects"]}
